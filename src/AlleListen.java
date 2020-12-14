@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-/*Checks if Hashmaps are empty12312313
+/*Checks if Hashmaps are empty123123
  * if not empty: creates Labels and Textareas
  * Names Labels (e.g.: Mitarbeiter, Räume, Reservierungen)
  * puts Data from HashMap into associating Texarea (e.g:: Employee Names into Textarea with the first line "Name:\n"*/
