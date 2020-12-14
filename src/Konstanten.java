@@ -15,14 +15,14 @@ public class Konstanten {
 
     static final Font Listen_Font = new Font("TeleNeo Office", Font.PLAIN, 20);
     static final Border Listen_Border = new LineBorder(new java.awt.Color(170, 20, 150));
-    static final File rFile = new File("C:\\Users\\A113017330\\Desktop\\Reservierungssystem\\Raumliste.txt");
-    static final File mFile = new File("C:\\Users\\A113017330\\Desktop\\Reservierungssystem\\Mitarbeiter.txt");
-    static final File resFile = new File("C:\\Users\\A113017330\\Desktop\\Reservierungssystem\\Reservierungen.txt");
+    static final File rFile = new File("C:\\Users\\A113017330\\Desktop\\Reservierungssystem\\\\ReservierungssystemGUI2\\Raumliste.txt");
+    static final File mFile = new File("C:\\Users\\A113017330\\Desktop\\Reservierungssystem\\ReservierungssystemGUI2\\Mitarbeiter.txt");
+    static final File resFile = new File("C:\\Users\\A113017330\\Desktop\\Reservierungssystem\\ReservierungssystemGUI2\\Reservierungen.txt");
 
     static BufferedReader mEinlesen;
     static {
         try {
-            mEinlesen = new BufferedReader(new FileReader("C:\\Users\\A113017330\\Desktop\\Reservierungssystem\\Mitarbeiter.txt"));
+            mEinlesen = new BufferedReader(new FileReader("C:\\Users\\A113017330\\Desktop\\Reservierungssystem\\ReservierungssystemGUI2\\Mitarbeiter.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.out.println("Datei nicht gefunden");
@@ -33,7 +33,7 @@ public class Konstanten {
     static BufferedReader rEinlesen;
     static {
         try {
-            rEinlesen = new BufferedReader(new FileReader("C:\\Users\\A113017330\\Desktop\\Reservierungssystem\\Raumliste.txt"));
+            rEinlesen = new BufferedReader(new FileReader("C:\\Users\\A113017330\\Desktop\\Reservierungssystem\\ReservierungssystemGUI2\\Raumliste.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.out.println("Datei nicht gefunden");
@@ -43,7 +43,7 @@ public class Konstanten {
     static BufferedReader resEinlesen;
     static {
         try {
-            resEinlesen = new BufferedReader(new FileReader("C:\\Users\\A113017330\\Desktop\\Reservierungssystem\\Reservierungen.txt"));
+            resEinlesen = new BufferedReader(new FileReader("C:\\Users\\A113017330\\Desktop\\Reservierungssystem\\ReservierungssystemGUI2\\Reservierungen.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.out.println("Datei nicht gefunden");
