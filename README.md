@@ -1,9 +1,6 @@
 # Reservierungssystem
 für 
-Mitarbeiter.txt
-
-Raumliste.txt
-
-Reservierungen.txt
-
+* Mitarbeiter.txt
+* Raumliste.txt
+* Reservierungen.txt
 richtige Pfade angeben.
