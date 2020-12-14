@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ReservierungssystemGUI2:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ReservierungssystemGUI2_jar</output-path>
+    <root id="archive" name="ReservierungssystemGUI2.jar">
+      <element id="module-output" name="ReservierungssystemGUI2" />
+    </root>
+  </artifact>
+</component>
