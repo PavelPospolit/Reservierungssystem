@@ -4,4 +4,4 @@ für
 * Raumliste.txt
 * com.trainee.rs.Classes.Reservierungen.txt
 
-*richtige* Pfade angeben.
+*richtige* Pfade angeben wenn nötig.
