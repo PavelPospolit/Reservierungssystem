@@ -5,22 +5,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-/*Enter a Password
- * compares entered Password with saved in Hashmap
- * if Password is correct, continue with Booking
- * if Password is incorrect show Error Message "Falsches Passwort" and go back to start*/
+/*Enter the room number u want to book
+ * checks if room does exist and is available
+ * if yes: continue
+ * if no: cancel and go back to start*/
 
-public class bPasswortGUI implements KeyListener {
+public class rNrBuchungGUI implements KeyListener {
     static final boolean shouldFIll = true;
     static final boolean shouldWeightx = true;
     static final boolean RIGHT_TO_LEFT = false;
     static JTextField Answer;
     static JLabel Anweisung;
     static JFrame frame;
-    static String sEinloggpasswort;
-    static boolean bPasswort = true;
+    static String sResRNR;
+    static boolean bRaumverfueg = true;
 
-    public static void addComponentsToPane(Container pane) {
+    public static void addComponentsToPane(Container pane){
         if (RIGHT_TO_LEFT) {
             pane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         }
@@ -45,7 +45,7 @@ public class bPasswortGUI implements KeyListener {
         Answer.setBorder(titled);
         pane.add(Answer, gdc);
 
-        Anweisung = new JLabel("Passwort: ");
+        Anweisung = new JLabel("Raumnummer:  ");
         gdc.fill = GridBagConstraints.HORIZONTAL;
         gdc.ipady = 50;
         gdc.gridx = 0;
@@ -57,27 +57,19 @@ public class bPasswortGUI implements KeyListener {
         Anweisung.setHorizontalAlignment(JLabel.LEFT);
         pane.add(Anweisung, gdc);
 
-        button = new JButton(new AbstractAction("Eingabe") {
+        button = new JButton(new AbstractAction("Eingabe:") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                sEinloggpasswort = Answer.getText();
-                String[] hilfsString = DatenErzeugnung.getHmapMitarbeiter().keySet().toArray(new String[0]);
-                for (int i = 0; i < hilfsString.length; i++) {
-                    if ((hilfsString[i].equals(ReservierungGUI.sNutzername) ||
-                            DatenErzeugnung.getHmapMitarbeiter().get(hilfsString[i]).getsMaName().equals(ReservierungGUI.sNutzername))&&
-                            DatenErzeugnung.getHmapMitarbeiter().get(hilfsString[i]).getsPasswort().equals(sEinloggpasswort)) {
-                        bPasswort = true;
-                        break;
-                    } else bPasswort = false;
-                }
-
-                if (!bPasswort) {
-                    JOptionPane.showMessageDialog(frame, "Falsches Passwort.");
+                sResRNR = Answer.getText();
+                bRaumverfueg = DatenErzeugnung.getHmapRooms().containsKey(sResRNR)
+                        && (DatenErzeugnung.getHmapRooms().get(sResRNR).getVerfuegbarkeit()) == true;
+                if (bRaumverfueg) {
+                    BisGUI.createAndShowGui();
+                    frame.dispose();
+                } else if (bRaumverfueg == false) {
+                    JOptionPane.showMessageDialog(frame, "Raum nicht gefunden oder nicht vorhanden!");
                     frame.dispose();
                     StartAnsicht.createAndShowGui();
-                } else {
-                    rNrBuchungGUI.createAndShowGui();
-                    frame.dispose();
                 }
             }
         });
@@ -116,37 +108,32 @@ public class bPasswortGUI implements KeyListener {
         button.setForeground(Color.white);
         pane.add(button, gdc);
 
-        bPasswortGUI listener = new bPasswortGUI(Answer);
+        rNrBuchungGUI listener = new rNrBuchungGUI(Answer);
         Answer.addKeyListener(listener);
     }
-    public bPasswortGUI(JTextField textfield) {
-        JTextField nameInput;
+
+    JTextField nameInput;
+
+
+    public rNrBuchungGUI(JTextField textfield) {
         nameInput = textfield;
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-            sEinloggpasswort = Answer.getText();
-            String[] hilfsString = DatenErzeugnung.getHmapMitarbeiter().keySet().toArray(new String[0]);
-            for (int i = 0; i < hilfsString.length; i++) {
-                if ((hilfsString[i].equals(ReservierungGUI.sNutzername) ||
-                        DatenErzeugnung.getHmapMitarbeiter().get(hilfsString[i]).getsMaName().equals(ReservierungGUI.sNutzername))&&
-                        DatenErzeugnung.getHmapMitarbeiter().get(hilfsString[i]).getsPasswort().equals(sEinloggpasswort)) {
-                    bPasswort = true;
-                    break;
-                } else bPasswort = false;
-            }
-            if (!bPasswort) {
-                JOptionPane.showMessageDialog(frame, "Falsches Passwort.");
+            sResRNR = Answer.getText();
+            bRaumverfueg = DatenErzeugnung.getHmapRooms().containsKey(sResRNR)
+                    && DatenErzeugnung.getHmapRooms().get(sResRNR).getVerfuegbarkeit() == true;
+            if (bRaumverfueg) {
+                BisGUI.createAndShowGui();
+                frame.dispose();
+            } else if (bRaumverfueg == false) {
+                JOptionPane.showMessageDialog(frame, "Raum nicht gefunden oder nicht vorhanden!");
                 frame.dispose();
                 StartAnsicht.createAndShowGui();
-            } else {
-                rNrBuchungGUI.createAndShowGui();
-                frame.dispose();
             }
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+        } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
             StartAnsicht.createAndShowGui();
             frame.dispose();
         }
@@ -154,12 +141,16 @@ public class bPasswortGUI implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent arg0) {
-    }
-    @Override
-    public void keyTyped(KeyEvent arg0) {
+        // TODO Auto-generated method stub
+
     }
 
-    public static void createAndShowGui() {
+    @Override
+    public void keyTyped(KeyEvent arg0) {
+
+    }
+    
+    public static void createAndShowGui(){
         frame = new JFrame("Raumreservierung");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         addComponentsToPane(frame.getContentPane());

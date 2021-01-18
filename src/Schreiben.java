@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,8 +19,8 @@ public class Schreiben {
         try {
             mWriter = new BufferedWriter(new FileWriter(Konstanten.mFile, true));
         } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("keine Rechte");
+            JOptionPane.showMessageDialog(StartAnsicht.frame, "Es ist ein Fehler beim Schreiben aufgetreten, Support Kontaktieren!",
+                    "SCHREIBFEHLER", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -27,8 +28,8 @@ public class Schreiben {
         try {
             rWriter = new BufferedWriter(new FileWriter(Konstanten.rFile, true));
         } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("keine Rechte");
+            JOptionPane.showMessageDialog(StartAnsicht.frame, "Es ist ein Fehler beim Schreiben aufgetreten, Support Kontaktieren!",
+                    "SCHREIBFEHLER", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -36,8 +37,8 @@ public class Schreiben {
         try {
             resWriter = new BufferedWriter(new FileWriter(Konstanten.resFile, true));
         } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("keine Rechte");
+            JOptionPane.showMessageDialog(StartAnsicht.frame, "Es ist ein Fehler beim Schreiben aufgetreten, Support Kontaktieren!",
+                    "SCHREIBFEHLER", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -45,7 +46,7 @@ public class Schreiben {
         try {
             mLeeren = new BufferedWriter(new FileWriter(Konstanten.mFile));
         } catch (IOException e) {
-            e.printStackTrace();
+
             System.out.println("keine Rechte");
         }
         mLeeren.write("");
@@ -54,10 +55,10 @@ public class Schreiben {
         for (int i = 0; i < hilfsString.length; i++) {
             mWriter.write(
                     DatenErzeugnung.getHmapMitarbeiter().get(hilfsString[i]).getsMaName() +
-                    ", " +
-                    hilfsString[i] +
-                    ", " +
-                    DatenErzeugnung.getHmapMitarbeiter().get(hilfsString[i]).getsPasswort());
+                            ", " +
+                            hilfsString[i] +
+                            ", " +
+                            DatenErzeugnung.getHmapMitarbeiter().get(hilfsString[i]).getsPasswort());
             mWriter.newLine();
         }
         mWriter.close();
@@ -65,7 +66,7 @@ public class Schreiben {
         try {
             rLeeren = new BufferedWriter(new FileWriter(Konstanten.rFile));
         } catch (IOException e) {
-            e.printStackTrace();
+
             System.out.println("keine Rechte");
         }
         rLeeren.write("");
@@ -74,14 +75,14 @@ public class Schreiben {
         for (int i = 0; i < hilfsString.length; i++) {
             rWriter.write(
                     DatenErzeugnung.getHmapRooms().get(hilfsString[i]).getBezeichnung() +
-                    ", " +
-                    DatenErzeugnung.getHmapRooms().get(hilfsString[i]).getRaumNr() +
-                    ", " +
-                    DatenErzeugnung.getHmapRooms().get(hilfsString[i]).getEigenschaften() +
-                    ", " +
-                    DatenErzeugnung.getHmapRooms().get(hilfsString[i]).getKapazität() +
-                    ", " +
-                    DatenErzeugnung.getHmapRooms().get(hilfsString[i]).getVerfügbarkeit());
+                            ", " +
+                            DatenErzeugnung.getHmapRooms().get(hilfsString[i]).getRaumNr() +
+                            ", " +
+                            DatenErzeugnung.getHmapRooms().get(hilfsString[i]).getEigenschaften() +
+                            ", " +
+                            DatenErzeugnung.getHmapRooms().get(hilfsString[i]).getKapazitaet() +
+                            ", " +
+                            DatenErzeugnung.getHmapRooms().get(hilfsString[i]).getVerfuegbarkeit());
             rWriter.newLine();
         }
         rWriter.close();
@@ -89,7 +90,7 @@ public class Schreiben {
         try {
             resLeeren = new BufferedWriter(new FileWriter(Konstanten.resFile));
         } catch (IOException e) {
-            e.printStackTrace();
+
             System.out.println("keine Rechte");
         }
         resLeeren.write("");
@@ -98,12 +99,12 @@ public class Schreiben {
         for (int i = 0; i < hilfsString.length; i++) {
             resWriter.write(
                     DatenErzeugnung.getHmapReservierungen().get(hilfsString[i]).getsReservierungsnummer() +
-                    ", " +
-                    DatenErzeugnung.getHmapReservierungen().get(hilfsString[i]).getSmaName() +
-                    ", " +
-                    DatenErzeugnung.getHmapReservierungen().get(hilfsString[i]).getsRaumNummer() +
-                    ", " +
-                    DatenErzeugnung.getHmapReservierungen().get(hilfsString[i]).getsBisWann());
+                            ", " +
+                            DatenErzeugnung.getHmapReservierungen().get(hilfsString[i]).getSmaName() +
+                            ", " +
+                            DatenErzeugnung.getHmapReservierungen().get(hilfsString[i]).getsRaumNummer() +
+                            ", " +
+                            DatenErzeugnung.getHmapReservierungen().get(hilfsString[i]).getsBisWann());
             resWriter.newLine();
         }
         resWriter.close();

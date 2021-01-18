@@ -3,7 +3,7 @@ import java.awt.*;
 
 /*Checks if Hashmaps are empty
  * if not empty: creates Labels and Textareas
- * Names Labels (e.g.: Mitarbeiter, Räume, Reservierungen)
+ * Names Labels (e.g.: Mitarbeiter, Raeume, Reservierungen)
  * puts Data from HashMap into associating Texarea (e.g:: Employee Names into Textarea with the first line "Name:\n"*/
 
 public class AlleListen {
@@ -14,13 +14,13 @@ public class AlleListen {
     static JTextArea Raumbezeichnung;
     static JTextArea RaumNummer;
     static JTextArea RaumEigenschaften;
-    static JTextArea RaumKapazität;
-    static JTextArea RaumVerfügbarkeit;
+    static JTextArea RaumKapazitaet;
+    static JTextArea RaumVerfuegbarkeit;
     static JTextArea ReservierungNameMA;
     static JTextArea ReservierungRaumNummer;
     static JTextArea ReservierungEndDatum;
     static JLabel lMitarbeiter;
-    static JLabel lRäume;
+    static JLabel lRaeume;
     static JLabel lReservierungen;
     static JFrame frame;
 
@@ -29,34 +29,32 @@ public class AlleListen {
             pane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         }
         pane.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
+        GridBagConstraints gdc = new GridBagConstraints();
         if (shouldFIll) {
-            c.fill = GridBagConstraints.HORIZONTAL;
+            gdc.fill = GridBagConstraints.HORIZONTAL;
         }
         if (DatenErzeugnung.getHmapMitarbeiter().size() != 0) {
             Mitarbeitername = new JTextArea("Name:\n");
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridx = 0;
-            c.gridy = 1;
-            c.weightx = 5;
-            c.gridwidth = 1;
+            gdc.fill = GridBagConstraints.HORIZONTAL;
+            gdc.gridx = 0;
+            gdc.gridy = 1;
+            gdc.weightx = 5;
+            gdc.gridwidth = 1;
             Mitarbeitername.setBorder(Konstanten.Listen_Border);
             Mitarbeitername.setBackground(Color.black);
             Mitarbeitername.setFont(Konstanten.Listen_Font);
             Mitarbeitername.setForeground(Color.white);
-            pane.add(Mitarbeitername, c);
+            pane.add(Mitarbeitername, gdc);
             
             Mitarbeiternummer = new JTextArea("Mitarbeiternummer:\n");
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridx = 1;
-            c.gridy = 1;
-            c.weightx = 5;
-            c.gridwidth = 1;
+            gdc.fill = GridBagConstraints.HORIZONTAL;
+            gdc.gridx = 1;
+            gdc.gridy = 1;
             Mitarbeiternummer.setBorder(Konstanten.Listen_Border);
             Mitarbeiternummer.setBackground(Color.black);
             Mitarbeiternummer.setFont(Konstanten.Listen_Font);
             Mitarbeiternummer.setForeground(Color.white);
-            pane.add(Mitarbeiternummer, c);
+            pane.add(Mitarbeiternummer, gdc);
 
             String[] hilfsString = DatenErzeugnung.getHmapMitarbeiter().keySet().toArray(new String[0]);
             for (int i = 0; i < hilfsString.length; i++) {
@@ -65,136 +63,120 @@ public class AlleListen {
             }
 
             lMitarbeiter = new JLabel("MITARBEITER:  ");
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridx = 0;
-            c.gridy = 0;
-            c.weightx = 1;
-            c.gridwidth = 1;
+            gdc.fill = GridBagConstraints.HORIZONTAL;
+            gdc.gridx = 0;
+            gdc.gridy = 0;
+            gdc.weightx = 1;
+            gdc.gridwidth = 1;
             lMitarbeiter.setBorder(Konstanten.Listen_Border);
             lMitarbeiter.setFont(Konstanten.Listen_Font);
             lMitarbeiter.setForeground(Color.white);
             lMitarbeiter.setHorizontalAlignment(JLabel.LEFT);
-            pane.add(lMitarbeiter, c);
+            pane.add(lMitarbeiter, gdc);
         }
         if (DatenErzeugnung.getHmapRooms().size() != 0) {
             Raumbezeichnung = new JTextArea("Bezeichnung:\n");
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridx = 0;
-            c.gridy = 7;
-            c.weightx = 5;
-            c.gridwidth = 1;
+            gdc.fill = GridBagConstraints.HORIZONTAL;
+            gdc.gridx = 0;
+            gdc.gridy = 7;
             Raumbezeichnung.setBorder(Konstanten.Listen_Border);
             Raumbezeichnung.setBackground(Color.black);
             Raumbezeichnung.setFont(Konstanten.Listen_Font);
             Raumbezeichnung.setForeground(Color.white);
-            pane.add(Raumbezeichnung, c);
+            pane.add(Raumbezeichnung, gdc);
 
             RaumNummer = new JTextArea("Nummer:\n");
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridx = 1;
-            c.gridy = 7;
-            c.weightx = 5;
-            c.gridwidth = 1;
+            gdc.fill = GridBagConstraints.HORIZONTAL;
+            gdc.gridx = 1;
+            gdc.gridy = 7;
             RaumNummer.setBorder(Konstanten.Listen_Border);
             RaumNummer.setBackground(Color.black);
             RaumNummer.setFont(Konstanten.Listen_Font);
             RaumNummer.setForeground(Color.white);
-            pane.add(RaumNummer, c);
+            pane.add(RaumNummer, gdc);
 
             RaumEigenschaften = new JTextArea("Eigenschaften:\n");
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridx = 2;
-            c.gridy = 7;
-            c.weightx = 5;
-            c.gridwidth = 1;
+            gdc.fill = GridBagConstraints.HORIZONTAL;
+            gdc.gridx = 2;
+            gdc.gridy = 7;
             RaumEigenschaften.setBorder(Konstanten.Listen_Border);
             RaumEigenschaften.setBackground(Color.black);
             RaumEigenschaften.setFont(Konstanten.Listen_Font);
             RaumEigenschaften.setForeground(Color.white);
-            pane.add(RaumEigenschaften, c);
+            pane.add(RaumEigenschaften, gdc);
 
-            RaumKapazität = new JTextArea("Kapazität:\n");
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridx = 3;
-            c.gridy = 7;
-            c.weightx = 5;
-            c.gridwidth = 1;
-            RaumKapazität.setBorder(Konstanten.Listen_Border);
-            RaumKapazität.setBackground(Color.black);
-            RaumKapazität.setFont(Konstanten.Listen_Font);
-            RaumKapazität.setForeground(Color.white);
-            pane.add(RaumKapazität, c);
+            RaumKapazitaet = new JTextArea("Kapazitaet:\n");
+            gdc.fill = GridBagConstraints.HORIZONTAL;
+            gdc.gridx = 3;
+            gdc.gridy = 7;
+            RaumKapazitaet.setBorder(Konstanten.Listen_Border);
+            RaumKapazitaet.setBackground(Color.black);
+            RaumKapazitaet.setFont(Konstanten.Listen_Font);
+            RaumKapazitaet.setForeground(Color.white);
+            pane.add(RaumKapazitaet, gdc);
 
-            RaumVerfügbarkeit = new JTextArea("Verfügbarkeit:\n");
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridx = 4;
-            c.gridy = 7;
-            c.weightx = 5;
-            c.gridwidth = 1;
-            RaumVerfügbarkeit.setBorder(Konstanten.Listen_Border);
-            RaumVerfügbarkeit.setBackground(Color.black);
-            RaumVerfügbarkeit.setFont(Konstanten.Listen_Font);
-            RaumVerfügbarkeit.setForeground(Color.white);
-            pane.add(RaumVerfügbarkeit, c);
+            RaumVerfuegbarkeit = new JTextArea("Verfuegbarkeit:\n");
+            gdc.fill = GridBagConstraints.HORIZONTAL;
+            gdc.gridx = 4;
+            gdc.gridy = 7;
+            RaumVerfuegbarkeit.setBorder(Konstanten.Listen_Border);
+            RaumVerfuegbarkeit.setBackground(Color.black);
+            RaumVerfuegbarkeit.setFont(Konstanten.Listen_Font);
+            RaumVerfuegbarkeit.setForeground(Color.white);
+            pane.add(RaumVerfuegbarkeit, gdc);
 
             String[] hilfsString = DatenErzeugnung.getHmapRooms().keySet().toArray(new String[0]);
             for (int i = 0; i < hilfsString.length; i++) {
                 RaumNummer.setText(RaumNummer.getText() + DatenErzeugnung.getHmapRooms().get(hilfsString[i]).getRaumNr() + "\n");
                 Raumbezeichnung.setText(Raumbezeichnung.getText() + DatenErzeugnung.getHmapRooms().get(hilfsString[i]).getBezeichnung() + "\n");
                 RaumEigenschaften.setText(RaumEigenschaften.getText() + DatenErzeugnung.getHmapRooms().get(hilfsString[i]).getEigenschaften() + "\n");
-                RaumKapazität.setText(RaumKapazität.getText() + DatenErzeugnung.getHmapRooms().get(hilfsString[i]).getKapazität() + "\n");
-                RaumVerfügbarkeit.setText(RaumVerfügbarkeit.getText() + DatenErzeugnung.getHmapRooms().get(hilfsString[i]).getVerfügbarkeit() + "\n");
+                RaumKapazitaet.setText(RaumKapazitaet.getText() + DatenErzeugnung.getHmapRooms().get(hilfsString[i]).getKapazitaet() + "\n");
+                RaumVerfuegbarkeit.setText(RaumVerfuegbarkeit.getText() + DatenErzeugnung.getHmapRooms().get(hilfsString[i]).getVerfuegbarkeit() + "\n");
             }
 
-            lRäume = new JLabel("RÄUME:  ");
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridx = 0;
-            c.gridy = 6;
-            c.weightx = 1;
-            c.gridwidth = 1;
-            lRäume.setBorder(Konstanten.Listen_Border);
-            lRäume.setFont(Konstanten.Listen_Font);
-            lRäume.setForeground(Color.white);
-            lRäume.setHorizontalAlignment(JLabel.LEFT);
-            pane.add(lRäume, c);
+            lRaeume = new JLabel("RÄUME:  ");
+            gdc.fill = GridBagConstraints.HORIZONTAL;
+            gdc.gridx = 0;
+            gdc.gridy = 6;
+            gdc.weightx = 1;
+            gdc.gridwidth = 1;
+            lRaeume.setBorder(Konstanten.Listen_Border);
+            lRaeume.setFont(Konstanten.Listen_Font);
+            lRaeume.setForeground(Color.white);
+            lRaeume.setHorizontalAlignment(JLabel.LEFT);
+            pane.add(lRaeume, gdc);
         }
 
         if (DatenErzeugnung.getHmapReservierungen().size() != 0) {
             ReservierungNameMA = new JTextArea("Name:\n");
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridx = 0;
-            c.gridy = 9;
-            c.weightx = 5;
-            c.gridwidth = 1;
+            gdc.fill = GridBagConstraints.HORIZONTAL;
+            gdc.gridx = 0;
+            gdc.gridy = 9;
             ReservierungNameMA.setBorder(Konstanten.Listen_Border);
             ReservierungNameMA.setBackground(Color.black);
             ReservierungNameMA.setFont(Konstanten.Listen_Font);
             ReservierungNameMA.setForeground(Color.white);
-            pane.add(ReservierungNameMA, c);
+            pane.add(ReservierungNameMA, gdc);
 
             ReservierungRaumNummer = new JTextArea("Raumnummer:\n");
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridx = 1;
-            c.gridy = 9;
-            c.weightx = 5;
-            c.gridwidth = 1;
+            gdc.fill = GridBagConstraints.HORIZONTAL;
+            gdc.gridx = 1;
+            gdc.gridy = 9;
             ReservierungRaumNummer.setBorder(Konstanten.Listen_Border);
             ReservierungRaumNummer.setBackground(Color.black);
             ReservierungRaumNummer.setFont(Konstanten.Listen_Font);
             ReservierungRaumNummer.setForeground(Color.white);
-            pane.add(ReservierungRaumNummer, c);
+            pane.add(ReservierungRaumNummer, gdc);
 
             ReservierungEndDatum = new JTextArea("Bis wann reserviert:\n");
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridx = 2;
-            c.gridy = 9;
-            c.weightx = 5;
-            c.gridwidth = 1;
+            gdc.fill = GridBagConstraints.HORIZONTAL;
+            gdc.gridx = 2;
+            gdc.gridy = 9;
             ReservierungEndDatum.setBorder(Konstanten.Listen_Border);
             ReservierungEndDatum.setBackground(Color.black);
             ReservierungEndDatum.setFont(Konstanten.Listen_Font);
             ReservierungEndDatum.setForeground(Color.white);
-            pane.add(ReservierungEndDatum, c);
+            pane.add(ReservierungEndDatum, gdc);
 
             String[] hilfsString = DatenErzeugnung.getHmapReservierungen().keySet().toArray(new String[0]);
             for (int i = 0; i < hilfsString.length; i++) {
@@ -205,17 +187,17 @@ public class AlleListen {
             }
 
             lReservierungen = new JLabel("RESERVIERUNGEN:  ");
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.ipady = 50;
-            c.gridx = 0;
-            c.gridy = 8;
-            c.weightx = 1;
-            c.gridwidth = 1;
+            gdc.fill = GridBagConstraints.HORIZONTAL;
+            gdc.ipady = 50;
+            gdc.gridx = 0;
+            gdc.gridy = 8;
+            gdc.weightx = 1;
+            gdc.gridwidth = 1;
             lReservierungen.setBorder(Konstanten.Listen_Border);
             lReservierungen.setFont(Konstanten.Listen_Font);
             lReservierungen.setForeground(Color.white);
             lReservierungen.setHorizontalAlignment(JLabel.LEFT);
-            pane.add(lReservierungen, c);
+            pane.add(lReservierungen, gdc);
         }
     }
 

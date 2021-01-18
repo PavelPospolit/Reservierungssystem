@@ -2,8 +2,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.HashMap;
 
-/*Creates 3 Objects Mitarbeiter (ma), Räume (room), Reservierungen (res)
- * creates 3 Hashmaps (hmapMitarbeiter, hmapRäume, hmapReservierungen)
+/*Creates 3 Objects Mitarbeiter (ma), Raeume (room), Reservierungen (res)
+ * creates 3 Hashmaps (hmapMitarbeiter, hmapRaeume, hmapReservierungen)
  * puts the Data from Onjects imto Hashmaps*/
 
 public class DatenErzeugnung {
@@ -11,7 +11,7 @@ public class DatenErzeugnung {
     static final String UTF8_BOM = "\uFEFF";
     static String[] alhilfe;
     private static HashMap<String, Mitarbeiter> hmapMitarbeiter = new HashMap<>();
-    private static HashMap<String, Räume> hmapRäume = new HashMap<>();
+    private static HashMap<String, Raeume> hmapRaeume = new HashMap<>();
     private static HashMap<String, Reservierungen> hmapReservierungen = new HashMap<>();
 
     public static HashMap<String, Mitarbeiter> getHmapMitarbeiter() {
@@ -22,16 +22,16 @@ public class DatenErzeugnung {
         return hmapReservierungen;
     }
 
-    public static HashMap<String, Räume> getHmapRooms() {
-        return hmapRäume;
+    public static HashMap<String, Raeume> getHmapRooms() {
+        return hmapRaeume;
     }
 
     public static void setHmapMitarbeiter(HashMap<String, Mitarbeiter> hmapMitarbeiter1) {
         hmapMitarbeiter = hmapMitarbeiter1;
     }
 
-    public static void setHmapRooms(HashMap<String, Räume> hmapRooms1) {
-        hmapRäume = hmapRooms1;
+    public static void setHmapRooms(HashMap<String, Raeume> hmapRooms1) {
+        hmapRaeume = hmapRooms1;
     }
 
     public static void setHmapReservierungen(HashMap<String, Reservierungen> hmapReservierungen1) {
@@ -61,13 +61,13 @@ public class DatenErzeugnung {
             }
             if (welcher == Konstanten.rEinlesen) {
                 for (int j = 0; j <= alhilfe.length - 4; j += 5) {
-                    Räume room = new Räume(
+                    Raeume room = new Raeume(
                             alhilfe[j],
                             alhilfe[j + 1],
                             alhilfe[j + 2],
                             Integer.parseInt(alhilfe[j + 3]),
                             Boolean.parseBoolean(alhilfe[j + 4]));
-                    hmapRäume.put(room.getRaumNr(), room);
+                    hmapRaeume.put(room.getRaumNr(), room);
                 }
             }
             if (welcher == Konstanten.resEinlesen) {

@@ -1,3 +1,5 @@
+import sun.security.krb5.internal.ktab.KeyTabInputStream;
+
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
@@ -5,20 +7,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-/*Enter a Password
- * compares entered Password with saved in Hashmap
- * if Password is correct, continue with Booking
- * if Password is incorrect show Error Message "Falsches Passwort" and go back to start*/
+/*Enter room Number of the room u want to give back
+ * checks if room exists
+ * sets availability to true and deletes reservation */
 
-public class bPasswortGUI implements KeyListener {
+
+public class ZurueckgebenGUI implements KeyListener {
     static final boolean shouldFIll = true;
     static final boolean shouldWeightx = true;
     static final boolean RIGHT_TO_LEFT = false;
     static JTextField Answer;
     static JLabel Anweisung;
     static JFrame frame;
-    static String sEinloggpasswort;
-    static boolean bPasswort = true;
+    static String sZurueckNr;
+    static final String UTF8_BOM = "\uFEFF";
+    static boolean bRaumverfueg = true;
 
     public static void addComponentsToPane(Container pane) {
         if (RIGHT_TO_LEFT) {
@@ -45,7 +48,7 @@ public class bPasswortGUI implements KeyListener {
         Answer.setBorder(titled);
         pane.add(Answer, gdc);
 
-        Anweisung = new JLabel("Passwort: ");
+        Anweisung = new JLabel("Welchen Raum wollen Sie zurueckgeben(Raumnummer oder Reservierungsnummer)?");
         gdc.fill = GridBagConstraints.HORIZONTAL;
         gdc.ipady = 50;
         gdc.gridx = 0;
@@ -57,28 +60,22 @@ public class bPasswortGUI implements KeyListener {
         Anweisung.setHorizontalAlignment(JLabel.LEFT);
         pane.add(Anweisung, gdc);
 
-        button = new JButton(new AbstractAction("Eingabe") {
+        button = new JButton(new AbstractAction("Freigeben") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                sEinloggpasswort = Answer.getText();
-                String[] hilfsString = DatenErzeugnung.getHmapMitarbeiter().keySet().toArray(new String[0]);
+                sZurueckNr = Answer.getText();
+                String[] hilfsString = DatenErzeugnung.getHmapReservierungen().keySet().toArray(new String[0]);
                 for (int i = 0; i < hilfsString.length; i++) {
-                    if ((hilfsString[i].equals(ReservierungGUI.sNutzername) ||
-                            DatenErzeugnung.getHmapMitarbeiter().get(hilfsString[i]).getsMaName().equals(ReservierungGUI.sNutzername))&&
-                            DatenErzeugnung.getHmapMitarbeiter().get(hilfsString[i]).getsPasswort().equals(sEinloggpasswort)) {
-                        bPasswort = true;
-                        break;
-                    } else bPasswort = false;
+                    if (DatenErzeugnung.getHmapReservierungen().get(hilfsString[i]).getsRaumNummer().equals(sZurueckNr)) {
+                        DatenErzeugnung.getHmapReservierungen().remove(hilfsString[i]);
+                    }
                 }
-
-                if (!bPasswort) {
-                    JOptionPane.showMessageDialog(frame, "Falsches Passwort.");
-                    frame.dispose();
-                    StartAnsicht.createAndShowGui();
-                } else {
-                    rNrBuchungGUI.createAndShowGui();
-                    frame.dispose();
+                if (DatenErzeugnung.getHmapRooms().containsKey(sZurueckNr)) {
+                    DatenErzeugnung.getHmapRooms().get(sZurueckNr).setVerfuegbarkeit(true);
                 }
+                JOptionPane.showMessageDialog(frame, "Raum " + sZurueckNr + " erfolgreich freigegeben!");
+                frame.dispose();
+                StartAnsicht.createAndShowGui();
             }
         });
         if (shouldWeightx) {
@@ -89,7 +86,7 @@ public class bPasswortGUI implements KeyListener {
         gdc.ipadx = 30;
         gdc.insets = new Insets(5, 5, 5, 5);
         gdc.gridx = 0;
-        gdc.gridy = 2;
+        gdc.gridy = 3;
         gdc.gridwidth = 1;
         gdc.gridheight = 1;
         button.setFont(new Font("TeleNeo Office", Font.PLAIN, 30));
@@ -110,43 +107,39 @@ public class bPasswortGUI implements KeyListener {
         gdc.fill = GridBagConstraints.HORIZONTAL;
         gdc.insets = new Insets(5, 5, 5, 5);
         gdc.gridx = 0;
-        gdc.gridy = 3;
+        gdc.gridy = 4;
         button.setFont(new Font("TeleNeo Office", Font.PLAIN, 30));
         button.setBackground(Color.darkGray);
         button.setForeground(Color.white);
         pane.add(button, gdc);
 
-        bPasswortGUI listener = new bPasswortGUI(Answer);
+        ZurueckgebenGUI listener = new ZurueckgebenGUI(Answer);
         Answer.addKeyListener(listener);
+
     }
-    public bPasswortGUI(JTextField textfield) {
-        JTextField nameInput;
+    JTextField nameInput;
+
+    public ZurueckgebenGUI(JTextField textfield) {
         nameInput = textfield;
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-            sEinloggpasswort = Answer.getText();
-            String[] hilfsString = DatenErzeugnung.getHmapMitarbeiter().keySet().toArray(new String[0]);
+            sZurueckNr = Answer.getText();
+            String[] hilfsString = DatenErzeugnung.getHmapReservierungen().keySet().toArray(new String[0]);
             for (int i = 0; i < hilfsString.length; i++) {
-                if ((hilfsString[i].equals(ReservierungGUI.sNutzername) ||
-                        DatenErzeugnung.getHmapMitarbeiter().get(hilfsString[i]).getsMaName().equals(ReservierungGUI.sNutzername))&&
-                        DatenErzeugnung.getHmapMitarbeiter().get(hilfsString[i]).getsPasswort().equals(sEinloggpasswort)) {
-                    bPasswort = true;
-                    break;
-                } else bPasswort = false;
+                if (DatenErzeugnung.getHmapReservierungen().get(hilfsString[i]).getsRaumNummer().equals(sZurueckNr)) {
+                    DatenErzeugnung.getHmapReservierungen().remove(hilfsString[i]);
+                }
             }
-            if (!bPasswort) {
-                JOptionPane.showMessageDialog(frame, "Falsches Passwort.");
-                frame.dispose();
-                StartAnsicht.createAndShowGui();
-            } else {
-                rNrBuchungGUI.createAndShowGui();
-                frame.dispose();
+            if (DatenErzeugnung.getHmapRooms().containsKey(sZurueckNr)) {
+                DatenErzeugnung.getHmapRooms().get(sZurueckNr).setVerfuegbarkeit(true);
             }
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            JOptionPane.showMessageDialog(frame, "Raum " + sZurueckNr + " erfolgreich freigegeben!");
+            frame.dispose();
+            StartAnsicht.createAndShowGui();
+        } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
             StartAnsicht.createAndShowGui();
             frame.dispose();
         }
@@ -154,11 +147,14 @@ public class bPasswortGUI implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent arg0) {
-    }
-    @Override
-    public void keyTyped(KeyEvent arg0) {
+        // TODO Auto-generated method stub
+
     }
 
+    @Override
+    public void keyTyped(KeyEvent arg0) {
+        // TODO Auto-generated method stub
+    }
     public static void createAndShowGui() {
         frame = new JFrame("Raumreservierung");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

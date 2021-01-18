@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,31 +16,32 @@ import java.util.Date;
 public class Zeit_Vergleich extends Thread {
     public void run() {
         while (true) {
-            SimpleDateFormat df = new SimpleDateFormat("dd.MM.yy;HH:mm");
-            String date = df.format(new Date());
+            String date = Konstanten.df.format(new Date());
             String[] hilfsString = DatenErzeugnung.getHmapReservierungen().keySet().toArray(new String[0]);
             for (int i = 0; i < hilfsString.length; i++) {
                 Date date1 = null;
                 try {
-                    date1 = df.parse(date);
+                    date1 = Konstanten.df.parse(date);
                 } catch (ParseException e) {
-                    e.printStackTrace();
+                    System.out.println("Falsches Zeitformat");
                 }
                 Date date2 = null;
                 try {
-                    date2 = df.parse(DatenErzeugnung.getHmapReservierungen().get(hilfsString[i]).getsBisWann());
+                    date2 = Konstanten.df.parse(DatenErzeugnung.getHmapReservierungen().get(hilfsString[i]).getsBisWann());
                 } catch (ParseException e) {
-                    e.printStackTrace();
+                    System.out.println("Falsches Zeitformat");
                 }
                 if (date1.compareTo(date2) >= 0) {
-                    DatenErzeugnung.getHmapRooms().get(DatenErzeugnung.getHmapReservierungen().get(hilfsString[i]).getsRaumNummer()).setVerfügbarkeit(true);
+                    DatenErzeugnung.getHmapRooms().get(DatenErzeugnung.getHmapReservierungen().get(hilfsString[i]).getsRaumNummer()).setVerfuegbarkeit(true);
                     DatenErzeugnung.getHmapReservierungen().remove(hilfsString[i]);
                 }
             }
             try {
                 sleep(1000);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(StartAnsicht.frame, "Es ist ein Fehler beim Zeitvergleich " +
+                                "aufgetreten, Bitte support kontaktieren! Fehlercode",
+                        "Aktualisierungsfehler", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
