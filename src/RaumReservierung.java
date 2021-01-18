@@ -1,7 +1,11 @@
+import com.trainee.rs.Ansicht.StartAnsicht;
+import com.trainee.rs.actions.Zeit_Vergleich;
+import com.trainee.rs.ressources.DatenErzeugnung;
+
 import java.io.IOException;
 
 /*read in Data (leseAlle() function)
-* create StartAnsicht GUI
+* create com.trainee.rs.Ansicht.StartAnsicht GUI
 * create a Time Check Onject with constructor
 * start time check thread (checks time and if given time is higher than time until a room was booked: return room automatically*/
 

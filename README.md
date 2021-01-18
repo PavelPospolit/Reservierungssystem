@@ -1,7 +1,7 @@
 # Reservierungssystem
 für 
-* Mitarbeiter.txt
+* com.trainee.rs.Classes.Mitarbeiter.txt
 * Raumliste.txt
-* Reservierungen.txt
+* com.trainee.rs.Classes.Reservierungen.txt
 
 *richtige* Pfade angeben.
