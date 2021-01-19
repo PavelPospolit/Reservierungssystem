@@ -8,7 +8,7 @@ import java.awt.*;
 
 /*Checks if Hashmaps are empty
  * if not empty: creates Labels and Textareas
- * Names Labels (e.g.: com.trainee.rs.Classes.Mitarbeiter, com.trainee.rs.Classes.Raeume, com.trainee.rs.Classes.Reservierungen)
+ * Names Labels (e.g.: Mitarbeiter, Raeume, com.trainee.rs.Classes.Reservierungen)
  * puts Data from HashMap into associating Texarea (e.g:: Employee Names into Textarea with the first line "Name:\n"*/
 
 public class AlleListen {
